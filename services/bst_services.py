@@ -135,10 +135,7 @@ class BSTMenu:
             return 0
         return 1 + self._count_rec(current.left) + self._count_rec(current.right)
 
-    # ------------------------------------------------------------------
-    # DISPLAY -> bantuan buat nampilin ke CLI, pakai inorder (alfabetis)
-    # ------------------------------------------------------------------
-    def display(self):
+    def display_menu(self):
         daftar = self.inorder()
         if not daftar:
             print("Menu masih kosong.")
@@ -147,7 +144,6 @@ class BSTMenu:
         for node in daftar:
             print(f"{node.id_menu} | {node.nama_menu:<20} | Rp{node.harga:<10} | {node.kategori}")
 
-
 if __name__ == "__main__":
     bst = BSTMenu()
     bst.insert("M001", "Nasi Goreng", 20000, "Makanan")
@@ -155,7 +151,7 @@ if __name__ == "__main__":
     bst.insert("M003", "Ayam Bakar", 25000, "Makanan")
     bst.insert("M004", "Puding Coklat", 12000, "Dessert")
 
-    bst.display()
+    bst.display_menu()
     print("\nTinggi tree:", bst.get_height())
     print("Jumlah node:", bst.count_nodes())
 
@@ -164,4 +160,4 @@ if __name__ == "__main__":
 
     bst.delete("Nasi Goreng")
     print("\nSetelah hapus 'Nasi Goreng':")
-    bst.display()
+    bst.display_menu()
