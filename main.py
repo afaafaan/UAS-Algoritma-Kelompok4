@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from services.bst_service import BSTMenu
 from services.queue_service import QueueService
 from services.stack_service import StackService
@@ -36,3 +37,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+=======
+
+>>>>>>> 2919d4afb8dee9a7bf38bc7dd734f3123021c50f
