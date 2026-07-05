@@ -26,11 +26,17 @@ class HeapPrioritas:
             return a["prioritas"] > b["prioritas"]
         return a["urutan"] < b["urutan"]
 
-    def _tentukan_prioritas(self, nama_pesanan):
+    def _tentukan_prioritas(self, nama_pesanan, kategori=None):
         """Tentukan skala prioritas berdasarkan jenis pesanan."""
         nama = nama_pesanan.lower()
         if "vip" in nama:
             return 5
+        if kategori:
+            kat = kategori.lower()
+            if kat in ("minuman", "dessert"):
+                return 3
+            if kat == "makanan":
+                return 2
         if any(kata in nama for kata in ["es ", "teh", "minuman", "puding", "dessert"]):
             return 3
         if any(kata in nama for kata in ["nasi", "ayam", "mie", "goreng", "bakar"]):
@@ -73,9 +79,9 @@ class HeapPrioritas:
     # ------------------------------------------------------------------
     # INSERT -> O(log n)
     # ------------------------------------------------------------------
-    def insert(self, nama_pesanan, prioritas=None):
+    def insert(self, nama_pesanan, prioritas=None, kategori=None):
         if prioritas is None:
-            prioritas = self._tentukan_prioritas(nama_pesanan)
+            prioritas = self._tentukan_prioritas(nama_pesanan, kategori)
 
         self._counter += 1
         self.data.append({

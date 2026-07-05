@@ -13,6 +13,11 @@ class StackService:
         # Mengambil elemen terakhir
         return self.riwayat.pop()
 
+    def peek(self):
+        if len(self.riwayat) == 0:
+            return None
+        return self.riwayat[-1]
+
     def display(self):
         if len(self.riwayat) == 0:
             print("[RIWAYAT] Buku Riwayat: KOSONG")
