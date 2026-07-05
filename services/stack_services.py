@@ -20,4 +20,3 @@ class StackService:
             # Dibalik (reversed) supaya yang paling baru tampil di atas
             for p in reversed(self.riwayat):
                 print(f"  - {p}")
-              
