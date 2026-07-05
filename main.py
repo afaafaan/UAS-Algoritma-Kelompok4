@@ -1,8 +1,8 @@
-from services.bst_service import BSTMenu
-from services.queue_service import QueueService
-from services.stack_service import StackService
+from services.bst_services import BSTMenu
+from services.queue_services import QueueService
+from services.stack_services import StackService
 from services.heap_service import HeapPrioritas
-from views.kasir_views import KasirView
+from views.kasir_view import KasirView
 
 
 def seed_menu_awal(bst: BSTMenu):
