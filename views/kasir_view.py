@@ -38,21 +38,27 @@ class KasirView:
                     if menu is None:
                         print(f"❌ Menu '{nama_pesanan}' tidak ditemukan. Cek daftar menu (opsi 1).")
                         continue
-                    self.queue.enqueue(menu.nama_menu)
+                    is_vip_input = input("Apakah pelanggan VIP? (y/n): ").strip().lower()
+                    is_vip = is_vip_input == 'y'
+                    self.queue.enqueue(menu.nama_menu, is_vip=is_vip)
                 else:
-                    self.queue.enqueue(nama_pesanan)
+                    is_vip_input = input("Apakah pelanggan VIP? (y/n): ").strip().lower()
+                    is_vip = is_vip_input == 'y'
+                    self.queue.enqueue(nama_pesanan, is_vip=is_vip)
 
             elif pilihan == '3':
-                pesanan = self.queue.dequeue()
-                if pesanan:
-                    print(f"--> Membawa '{pesanan}' ke dapur...")
+                pesanan_dict = self.queue.dequeue()
+                if pesanan_dict:
+                    pesanan_nama = pesanan_dict["display_name"]
+                    nama_asli = pesanan_dict["nama_asli"]
+                    print(f"--> Membawa '{pesanan_nama}' ke dapur...")
                     if self.heap:
                         kategori = None
                         if self.bst:
-                            menu = self.bst.search(pesanan)
+                            menu = self.bst.search(nama_asli)
                             if menu:
                                 kategori = menu.kategori
-                        self.heap.insert(pesanan, kategori=kategori)
+                        self.heap.insert(pesanan_nama, kategori=kategori)
                     else:
                         print("⚠️ Fitur Dapur (Heap) belum digabungkan.")
 
@@ -71,7 +77,10 @@ class KasirView:
                 self.queue.display()
                 antrean_depan = self.queue.peek()
                 if antrean_depan:
-                    print(f"  → Peek antrean: {antrean_depan}")
+                    if isinstance(antrean_depan, dict):
+                        print(f"  → Peek antrean: {antrean_depan['display_name']}")
+                    else:
+                        print(f"  → Peek antrean: {antrean_depan}")
 
                 print("\n--- 🍳 ANTREAN DAPUR (HEAP) ---")
                 if self.heap:
