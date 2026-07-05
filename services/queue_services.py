@@ -13,6 +13,11 @@ class QueueService:
         # Mengambil indeks ke-0 (paling depan)
         return self.antrean.pop(0)
 
+    def peek(self):
+        if len(self.antrean) == 0:
+            return None
+        return self.antrean[0]
+
     def display(self):
         if len(self.antrean) == 0:
             print("[KASIR] Status Antrean: KOSONG")
